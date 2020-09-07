@@ -15,5 +15,5 @@ Patch any kind of anti-debugging tricks and report what execution flows is going
 git clone https://github.com/visionius/hecate.git
 cd hecate
 make
-./hecate /anti_example/anti_disassembling/anti_new
+./hecate anti_example/anti_disassembling/anti_new
 ```
