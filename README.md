@@ -7,3 +7,12 @@ It is very common in analysis to find where and what is going to happend in proc
 </br>
 Find specific system calls, string printing or any instruction pattern, by executing the program in run-time.
 Patch any kind of anti-debugging tricks and report what execution flows is going to be affected.
+</br>
+###Run hecate (linux)
+
+'''
+git clone https://github.com/visionius/hecate.git
+cd hecate
+make
+./hecate /anti_example/anti_disassembling/anti_new
+'''

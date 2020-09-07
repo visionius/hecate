@@ -36,10 +36,28 @@ int load_file(char* file_address)
 }
 */
 
+void splash()
+{
+        puts("\n===============================================================\n");
+        puts(" ___                 ___                   ___               ");
+        puts("(   )               (   )                 (   )              ");
+        puts("| | .-.     .--.    | |   ___     .---.   | |_       .--.   ");
+        puts("| |/   \\   /    \\   | |  (   )   / .-, \\ (   __)    /    \\  ");
+        puts("|  .-. .  |  .-. ;  | |  ' /    (__) ; |  | |      |  .-. ; ");
+        puts("| |  | |  |  | | |  | |,' /       .'`  |  | | ___  |  | | | ");
+        puts("| |  | |  |  |/  |  | .  '.      / .'| |  | |(   ) |  |/  | ");
+        puts("| |  | |  |  ' _.'  | | `. \\    | /  | |  | | | |  |  ' _.' ");
+        puts("| |  | |  |  .'.-.  | |   \\ \\   ; |  ; |  | ' | |  |  .'.-. ");
+        puts("| |  | |  '  `-' /  | |    \\ .  ' `-'  |  ' `-' ;  '  `-' / ");
+        puts("(___)(___)  `.__.'  (___ ) (___) `.__.'_.   `.__.    `.__.'  ");
+        puts("\n===============================================================\n");
+        printf("\nHecate dispell some of the anti-disassembling, anti-debugging and also anti-vm tricks.\nFind any data pattern and code pattern that program can create and use in the execution time.\n");
 
+}
 
 int main(int argc, char** argv)
 {
+        splash();
         pid_t child;
         _DecodeResult res;
         _DecodedInst decodedInstructions[15];
@@ -72,7 +90,7 @@ int main(int argc, char** argv)
                         if (WIFEXITED(status))
                                 break;
                         ptrace(PTRACE_GETREGS, child, NULL, &regs);
-                        printf("RIP: %lld\n", regs.rip);
+                        printf("RIP: 0x%llx\n", regs.rip);
                         ins = ptrace(PTRACE_PEEKTEXT, child, regs.rip, NULL);
                         ptr_opcode = (unsigned char*)&ins;
                         printf("\ninstruction is :%016llX\n", ins);
