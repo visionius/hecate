@@ -9,6 +9,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <libgen.h>
+#include <string.h>
 
 
 /*
@@ -55,27 +57,26 @@ void splash()
 
 }
 
-int main(int argc, char** argv)
+int main(int argc, char* argv[])
 {
-        splash();
+        //splash();
         pid_t child;
-        _DecodeResult res;
         _DecodedInst decodedInstructions[15];
         _DecodeType dt = Decode32Bits;
         unsigned int decodedInstructionsCount = 0;
-
-
         //Instruction buffer opcode
         unsigned char* opcode_buf = (unsigned char*) calloc(1, 15);
-
+        char *program_pathname = argv[1];
         child = fork();
         if(child == 0)
         {
                 ptrace(PTRACE_TRACEME, 0, NULL, NULL);
-                execl(argv[1], argv[2], NULL);
+                execvp(program_pathname, ++argv);
+                exit(0);
         }
         else
         {
+                getchar();
                 int status;
                 unsigned long long ins = 0;
 		bool check_callfunc = false;
